@@ -1,0 +1,5 @@
+include examples/*.py
+include tutorials/*.py
+include README.md
+include LICENSE
+exclude nonlinear-control.egg-info/*
