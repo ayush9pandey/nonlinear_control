@@ -6,14 +6,14 @@ with open('README.md') as fp:
     # long_description = fp.read()
 
 setup(
-    name = 'nonlinear-control',
+    name = 'nonlinear_control',
     version = '0.1',
     author = 'Ayush Pandey',
     author_email = 'apandey@caltech.edu',
-    url = 'https://github.com/ayush9pandey/nonlinear-control',
+    url = 'https://github.com/ayush9pandey/nonlinear_control',
     description = 'Nonlinear control toolbox in Python',
     long_description = long_description,
-    packages = ['nonlinear-control'],
+    packages = ['nonlinear_control'],
     classifiers = [
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Science/Research',

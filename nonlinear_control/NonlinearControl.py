@@ -28,22 +28,38 @@ class NonlinearControl(object):
         Returns Lie bracket [f, g] = Lfg - Lgf
         '''
         return
-    def getRelativeDegree(self):
+    def getRelativeDegree(self, h):
         ''' 
         Returns the relative degree (if it exists) for the given system
         '''
-        for i in range(len(self.x)):
-            self.getLieDerivative()
-        return
+        Lf_prev = self.f
+        count = 0
+        for _ in range(len(self.x)):
+            count += 1
+            update = self.getLieDerivative(Lf_prev, h, 1)
+            if update == 0:
+                Lf_prev = update
+            else:
+                r = count
+            
+        return r
     
-    def getLieDerivative(self, f, g, order):
+    def getLieDerivative(self, f, g, order = 1):
         '''
         Returns the Lie derivative L^nfg, where n = order
         '''
         coord = self.coord
-        e_x1,e_x2,e_x3,e_x4,e_x5,e_x6,e_x7,e_x8 = coord.base_vectors()
-        e = [e_x1,e_x2,e_x3,e_x4,e_x5,e_x6,e_x7,e_x8]
-        return
+        e = coord.base_vectors()
+        # Create the field now
+        vec_field = 0
+        for i in range(len(e)):
+            vec = e[i]
+            vec_field += f[i] * vec
+        lie_derv = g 
+        for _ in range(order):
+            lie_derv = LieDerivative(vec_field, lie_derv)
+        return lie_derv
+
 
 
 def ode2sympy(odesize, ninputs, nparams = 0):
